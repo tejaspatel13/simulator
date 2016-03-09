@@ -168,7 +168,7 @@ def get_opcode_get_uri_payload(payload_data):
     payload_str = ''
     if len(payload_data) is not 0:
         dest_node = int(payload_data, 16)
-        dest_node_str = "%0.2X" % dest_node
+        dest_node_str = "{0:0.2X}".format(dest_node)
         payload_str += dest_node_str
 
     return payload_str
@@ -186,7 +186,7 @@ def get_opcode_subscribe_payload(payload_data):
     payload_len = len(payload_tuple)
 
     if temp_iter < payload_len:
-        source_node = "%0.2X" % payload_tuple[temp_iter]
+        source_node = "{0:0.2X}".format(payload_tuple[temp_iter])
         payload_str += source_node
     else:
         return payload_str
@@ -198,19 +198,19 @@ def get_opcode_subscribe_payload(payload_data):
         j = 0
         for key in key_value_rcvpad_list:
             if j < len(key):
-                payload_str += ("%0.8X" % key[j])
+                payload_str += ("{0:0.8X}".format(key[j]))
             else:
                 return payload_str
             j += 1
 
             if j < len(key):
-                payload_str += ("%0.4X" % key[j])
+                payload_str += ("{0:0.4X}".format(key[j]))
             else:
                 return payload_str
             j += 1
 
             if j < len(key):
-                payload_str += ("%0.4X" % key[j])
+                payload_str += ("{0:0.4X}".format(key[j]))
             else:
                 return payload_str
             j = 0
@@ -229,7 +229,7 @@ def get_opcode_get_kvp_payload(payload_data):
     payload_len = len(payload_tuple)
 
     if temp_iter < payload_len:
-        dest_node = "%0.2X" % payload_tuple[temp_iter]
+        dest_node = "{0:0.2X}".format(payload_tuple[temp_iter])
         payload_str += dest_node
     else:
         return payload_str
@@ -238,7 +238,7 @@ def get_opcode_get_kvp_payload(payload_data):
     if temp_iter < payload_len:
         key_list = payload_tuple[temp_iter]
         for key in key_list:
-            payload_str += ("%0.8X" % key[0])
+            payload_str += ("{0:0.8X}".format(key[0]))
     return payload_str
 
 
@@ -253,14 +253,14 @@ def get_opcode_set_kvp_payload(payload_data):
     temp_iter = 0
     payload_len = len(payload_tuple)
     if temp_iter < payload_len:
-        dest_node = "%0.2X" % payload_tuple[temp_iter]
+        dest_node = "{0:0.2X}".format(payload_tuple[temp_iter])
         payload_str += dest_node
     else:
         return payload_str
     temp_iter += 1
 
     if temp_iter < payload_len:
-        transaction_id = "%0.4X" % payload_tuple[temp_iter]
+        transaction_id = "{0:0.4X}".format(payload_tuple[temp_iter])
         payload_str += transaction_id
     else:
         return payload_str
@@ -271,13 +271,13 @@ def get_opcode_set_kvp_payload(payload_data):
         j = 0
         for key in key_value_list:
             if j < len(key):
-                payload_str += ("%0.8X" % key[j])
+                payload_str += ("{0:0.8X}".format(key[j]))
             else:
                 return payload_str
             j += 1
 
             if j < len(key):
-                value = "%X" % key[j]
+                value = "{0:X}".format(key[j])
                 value_string = value.zfill(key_value_size_dict[key[j - 1]] * 2)
                 payload_str += value_string
             else:
@@ -297,14 +297,14 @@ def get_opcode_pub_uri_payload(payload_data):
     temp_iter = 0
     payload_len = len(payload_tuple)
     if temp_iter < payload_len:
-        source_node = "%0.2X" % payload_tuple[temp_iter]
+        source_node = "{0:0.2X}".format(payload_tuple[temp_iter])
         payload_str += source_node
     else:
         return payload_str
     temp_iter += 1
 
     if temp_iter < payload_len:
-        namespace_id = "%0.2X" % payload_tuple[temp_iter]
+        namespace_id = "{0:0.2X}".format(payload_tuple[temp_iter])
         payload_str += namespace_id
     else:
         return payload_str
@@ -328,7 +328,7 @@ def get_opcode_pub_sub_result_payload(payload_data):
     temp_iter = 0
     payload_len = len(payload_tuple)
     if temp_iter < payload_len:
-        source_node = "%0.2X" % payload_tuple[temp_iter]
+        source_node = "{0:0.2X}".format(payload_tuple[temp_iter])
         payload_str += source_node
     else:
         return payload_str
@@ -339,13 +339,13 @@ def get_opcode_pub_sub_result_payload(payload_data):
         j = 0
         for key in key_value_list:
             if j < len(key):
-                payload_str += ("%0.8X" % key[j])
+                payload_str += ("{0:0.8X}".format(key[j]))
             else:
                 return payload_str
             j += 1
 
             if j < len(key):
-                payload_str += ("%0.2X" % key[j])
+                payload_str += ("{0:0.2X}".format(key[j]))
             else:
                 return payload_str
             j = 0
@@ -378,21 +378,21 @@ def get_opcode_pub_set_kvp_result_payload(payload_data):
     temp_iter = 0
     payload_len = len(payload_tuple)
     if temp_iter < payload_len:
-        source_node = "%0.2X" % payload_tuple[temp_iter]
+        source_node = "{0:0.2X}".format(payload_tuple[temp_iter])
         payload_str += source_node
     else:
         return payload_str
     temp_iter += 1
 
     if temp_iter < payload_len:
-        transaction_id = "%0.4X" % payload_tuple[temp_iter]
+        transaction_id = "{0:0.4X}".format(payload_tuple[temp_iter])
         payload_str += transaction_id
     else:
         return payload_str
     temp_iter += 1
 
     if temp_iter < payload_len:
-        result = "%0.2X" % payload_tuple[temp_iter]
+        result = "{0:0.2X}".format(payload_tuple[temp_iter])
         payload_str += result
     return payload_str
 
@@ -451,7 +451,7 @@ def get_case_execution_string(sheet, row, col, config_string, send_file_path, re
     if m2m_swarmlet == "Receive":
         key_value_size_str = "0x"
         for key, value in key_value_size_dict.items():
-            key_value_size_str += ("%0.8X" % key) + ("%0.2X" % value)
+            key_value_size_str += ("{0:0.8X}".format(key)) + ("{0:0.2X}".format(value))
         string = string + " -sv " + key_value_size_str
 
     if int(m2m_api, 16) is API_COMM_CONTROL_KVP:
@@ -480,7 +480,7 @@ def get_case_execution_string(sheet, row, col, config_string, send_file_path, re
             payload_str = get_opcode_pub_set_kvp_result_payload(payload_data)
 
         if len(payload_length) is 0:
-            payload_length = "0x%0.4X" % (len(payload_str)/2)
+            payload_length = "0x{0:0.4X}".format((len(payload_str)/2))
 
         string += " -sp " + payload_length + payload_str
 
