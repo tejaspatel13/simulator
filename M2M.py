@@ -490,22 +490,22 @@ def get_case_execution_string(sheet, row, col, config_string, send_file_path, re
 
 
 if __name__ == '__main__':
-    gsheetHandlerDict = {}
+    sheet_handler_dict = {}
     if len(sys.argv) != COMM_LINE_ARG_COUNT:
         print("Usage: python3 M2M.py test.xls ../M2M_send/M2M_send ../M2M_receive/M2M_receive")
     else:
-        gsheetHandlerDict = get_sheet_handle_of_excel_sheets_in_workbook(sys.argv[1])
-        get_device_credentials(gsheetHandlerDict["Sheet1"])
+        sheet_handler_dict = get_sheet_handle_of_excel_sheets_in_workbook(sys.argv[1])
+        get_device_credentials(sheet_handler_dict["Sheet1"])
         config_str = get_device_config_string()
-        case_row, case_column = get_test_case_raw_column(gsheetHandlerDict["Sheet1"])
+        case_row, case_column = get_test_case_raw_column(sheet_handler_dict["Sheet1"])
 
         i = 1
-        while gsheetHandlerDict["Sheet1"].nrows > case_row + i:
-            execute_string = get_case_execution_string(gsheetHandlerDict["Sheet1"], case_row + i,
+        while sheet_handler_dict["Sheet1"].nrows > case_row + i:
+            execute_string = get_case_execution_string(sheet_handler_dict["Sheet1"], case_row + i,
                                                        case_column, config_str, sys.argv[2],
                                                        sys.argv[3])
             print("\nExecuting Test case '" + get_cell_value(case_row + i, case_column,
-                                                             gsheetHandlerDict["Sheet1"]) + "'\n")
+                                                             sheet_handler_dict["Sheet1"]) + "'\n")
             os.system(execute_string)
             input('Please press any key to continue...')
             i += 1
